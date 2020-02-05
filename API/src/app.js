@@ -32,6 +32,26 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/api/products/:id', (req, res, next) => {
+  Product.findOne({ _id: req.params.id })
+    .then(product => {
+      res.status(200).json({ product: product });
+    })
+    .catch(error => {
+      res.status(404).json({ error: error });
+    });
+});
+
+app.use('/api/products', (req, res, next) => {
+  Product.find()
+    .then(products => {
+      res.status(200).json({ products: products });
+    })
+    .catch(error => {
+      res.status(400).json({ error: error });
+    });
+});
+
 app.use((req, res) => {
   res.status(200).json({ serverStatus: 'OK' });
 });
