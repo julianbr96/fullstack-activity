@@ -17,6 +17,7 @@
     "http-server": "^0.11.1",
     "live-server": "^1.2.1",
     "mongoose": "^5.8.11",
+    "readline-sync": "^1.4.10",
     "run-script-os": "^1.0.7"
   }
 }
