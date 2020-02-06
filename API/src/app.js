@@ -42,6 +42,33 @@ app.get('/api/products/:id', (req, res, next) => {
     });
 });
 
+app.put('/api/products/:id', (req, res, next) => {
+  const product = new Product({
+    _id: req.params.id,
+    name: req.body.name,
+    description: req.body.description,
+    price: req.body.price,
+    inStock: req.body.inStock
+  });
+});
+
+app.post('/api/products/', (req, res, next) => {
+  const product = new Product({
+    name: req.body.name,
+    description: req.body.description,
+    price: req.body.price,
+    inStock: req.body.inStock
+  });
+  product
+    .save()
+    .then(() => {
+      res.status(201).json({ product: product });
+    })
+    .catch(error => {
+      res.status(400).json({ error: error });
+    });
+});
+
 app.use('/api/products', (req, res, next) => {
   Product.find()
     .then(products => {
