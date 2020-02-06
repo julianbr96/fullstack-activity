@@ -50,6 +50,15 @@ app.put('/api/products/:id', (req, res, next) => {
     price: req.body.price,
     inStock: req.body.inStock
   });
+  Product.updateOne({ _id: req.params.id }, product)
+    .then(() => {
+      res.status(201).json({ message: 'Modified!' });
+    })
+    .catch(error => {
+      res.status(400).json({
+        error: error
+      });
+    });
 });
 
 app.post('/api/products/', (req, res, next) => {
